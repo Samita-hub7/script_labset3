@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+    <h1>Password Reset</h1>
+
+    <label>Enter Username:</label>
+    <input type="text" id="username">
+
+    <p id="result"></p>
+
+    <script>
+        $(document).ready(function() {
+
+            $("#username").keyup(function() {
+                var username = $(this).val();
+
+                if (username == "") {
+                    $("#result").html("");
+                }
+                else if (username.toLowerCase() == "admin") {
+                    $("#result").html("Username already exists");
+                }
+                else {
+                    $("#result").html("Username available");
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>

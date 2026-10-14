@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="url"],
+        input[type="tel"] {
+            width: 290px;
+            height: 30px;
+        }
+
+        select {
+            width: 300px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 12px 30px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            margin-left: 150px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Registration Form</h1>
+
+<form id="regForm">
+
+    <label>Name:</label>
+    <input type="text" id="name"><br>
+
+    <label>Address:</label>
+    <input type="text" id="address"><br>
+
+    <label>Username:</label>
+    <input type="text" id="username"><br>
+
+    <label>Email:</label>
+    <input type="email" id="email"><br>
+
+    <label>Password:</label>
+    <input type="password" id="password"><br>
+
+    <label>Website:</label>
+    <input type="url" id="website"><br>
+
+    <label>Phone:</label>
+    <input type="tel" id="phone"><br>
+
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <br><br>
+
+    <label>Course:</label>
+    <select id="course">
+        <option value="">Select Course</option>
+        <option value="BCA">BCA</option>
+        <option value="BBS">BBS</option>
+        <option value="BIM">BIM</option>
+        <option value="BIT">BIT</option>
+    </select>
+    <br>
+
+    <button type="submit">Register</button>
+
+</form>
+
+<script>
+$(document).ready(function() {
+
+    $("#regForm").submit(function(e) {
+        e.preventDefault();
+
+        if ($("#name").val().trim() == "" ||
+            $("#address").val().trim() == "" ||
+            $("#username").val().trim() == "" ||
+            $("#email").val().trim() == "" ||
+            $("#password").val() == "" ||
+            $("#website").val().trim() == "" ||
+            $("#phone").val().trim() == "" ||
+            !$("input[name='gender']:checked").val() ||
+            $("#course").val() == "") {
+
+            alert("Please fill all fields!");
+        }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("#email").val())) {
+            alert("Please enter a valid email!");
+        }
+        else if ($("#password").val().length < 6) {
+            alert("Password must be at least 6 characters!");
+        }
+        else {
+            alert("Registration Successful!");
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>

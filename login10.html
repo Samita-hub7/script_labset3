@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+</head>
+<body>
+
+    <h1>Login Form</h1>
+
+    <form onsubmit="return login()">
+        <label>User ID:</label>
+        <input type="text" id="userid" value="admin">
+        <br><br><br>
+
+        <label>Password:</label>
+        <input type="password" id="password">
+        <br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <h2 id="message"></h2>
+
+    <script>
+        function login() {
+            var user = document.getElementById("userid").value;
+            var pass = document.getElementById("password").value;
+
+            if (user === "admin" && pass === "admin") {
+                document.getElementById("message").innerHTML =
+                    "Welcome admin!";
+            } else {
+                document.getElementById("message").innerHTML =
+                    "Invalid User ID or Password!";
+            }
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>
