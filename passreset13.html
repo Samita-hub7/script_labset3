@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Reset</title>
+</head>
+<body>
+
+    <h2>Password Reset</h2>
+
+    <label>Enter Username:</label>
+    <input type="text" id="username" onkeyup="checkUsername()">
+
+    <p id="result"></p>
+
+<script>
+function checkUsername() {
+    var username = document.getElementById("username").value;
+
+    if (username == "") {
+        document.getElementById("result").innerHTML = "";
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "13_check.php?username=" + encodeURIComponent(username), true);
+
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            document.getElementById("result").innerHTML = xhr.responseText;
+        }
+    };
+
+    xhr.send();
+}
+</script>
+
+</body>
+</html>

@@ -1,59 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Country and City Selection</title>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-</head>
 <body>
 
-    <h1>Country and City Selection</h1>
+<h2>Country and City Selection</h2>
 
-    <label>Select Country:</label>
+<label for="country">Select Country: </label>
+<select id="country" onchange="loadCities()">
+    <option value="">Select Country</option>
+    <option value="Nepal">Nepal</option>
+    <option value="India">India</option>
+    <option value="China">China</option>
+</select>
 
-    <select id="country">
-        <option value="Nepal">Nepal</option>
-        <option value="India">India</option>
-        <option value="USA">USA</option>
-    </select>
+<br><br>
 
-    <br><br>
+<label for="city">Select City: </label>
+<select id="city">
+    <option value="">Select City</option>
+</select>
 
-    <label>Select City:</label>
-
-    <select id="city">
-        <option value="Kathmandu">Kathmandu</option>
-        <option value="Pokhara">Pokhara</option>
-        <option value="Biratnagar">Biratnagar</option>
-    </select>
-
-    <script>
-        $(document).ready(function() {
-
-            var cities = {
-                Nepal: ["Kathmandu", "Pokhara", "Biratnagar"],
-                India: ["Delhi", "Mumbai", "Kolkata"],
-                USA: ["New York", "Los Angeles", "Chicago"]
-            };
-
-            $("#country").change(function() {
-
-                var country = $(this).val();
-
-                $("#city").empty();
-
-                $.each(cities[country], function(index, city) {
-                    $("#city").append(
-                        $("<option></option>")
-                        .val(city)
-                        .text(city)
-                    );
-                });
-
-            });
-
-        });
-    </script>
+<script>
+function loadCities() {
+    var country = document.getElementById("country").value;
+    var city = document.getElementById("city");
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "cities.php?country=" + country, true);
+    xhr.onload = function() {
+        if(xhr.status == 200) {
+            city.innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+}
+</script>
 
 </body>
 </html>

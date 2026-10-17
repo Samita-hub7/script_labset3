@@ -2,41 +2,56 @@
 <html>
 <head>
     <title>Login Form</title>
+
+    <script src="https://code.jquery.com/jquery-4.0.0.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#loginForm").submit(function(event) {
+                event.preventDefault();
+
+                var userid = $("#userid").val();
+                var password = $("#password").val();
+
+                $.ajax({
+                    url: "10_Backend.php",
+                    type: "POST",
+                    data: {
+                        userid: userid,
+                        password: password
+                    },
+
+                    success: function(response) {
+                        if (response == "success") {
+                            $("#message").text("Welcome " + userid + "!");
+                            
+                        } else {
+                            $("#message").text(
+                                "Invalid userid or password. Please try again."
+                            );
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </head>
+
 <body>
+    <h2>Login Form</h2>
 
-    <h1>Login Form</h1>
-
-    <form onsubmit="return login()">
+    <form id="loginForm">
         <label>User ID:</label>
-        <input type="text" id="userid" value="admin">
-        <br><br><br>
+        <input type="text" id="userid">
+        <br><br>
 
         <label>Password:</label>
         <input type="password" id="password">
         <br><br>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="loginButton">Login</button>
     </form>
 
-    <h2 id="message"></h2>
-
-    <script>
-        function login() {
-            var user = document.getElementById("userid").value;
-            var pass = document.getElementById("password").value;
-
-            if (user === "admin" && pass === "admin") {
-                document.getElementById("message").innerHTML =
-                    "Welcome admin!";
-            } else {
-                document.getElementById("message").innerHTML =
-                    "Invalid User ID or Password!";
-            }
-
-            return false;
-        }
-    </script>
-
+    <p id="message"></p>
 </body>
 </html>
